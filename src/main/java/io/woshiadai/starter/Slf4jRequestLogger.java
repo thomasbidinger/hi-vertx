@@ -80,7 +80,7 @@ public class Slf4jRequestLogger implements RequestLogHandler {
       case DEFAULT:
         String referrer = headers.contains("referrer") ? headers.get("referrer") : headers.get("referer");
         String userAgent = headers.get("user-agent");
-        String body = context.getBodyAsString().replaceAll("(\\r|\\n)", "");
+        String body = context.getBodyAsString() == null ? "-" : context.getBodyAsString().replaceAll("(\\r|\\n)", "");
         referrer = referrer == null ? "-" : referrer;
         userAgent = userAgent == null ? "-" : userAgent;
         message = String.format("%s - - [%s] \"%s %s %s\" %d %d \"%s\" \"%s\" %dms %s",
